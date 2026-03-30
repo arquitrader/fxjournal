@@ -297,6 +297,29 @@ export default function App() {
 
         {/* PREMIUM */}
         {view === 'premium' && (
+user?.id === 'b3f9b73f-3485-46ec-bc3f-fa2239ace878' ? (
+    /* ESTO SOLO LO VES TÚ (EL DUEÑO) */
+    <div style={{ animation: 'fadeIn 0.5s ease' }}>
+      <div style={{ marginBottom: 24, padding: '16px', background: 'linear-gradient(90deg, #22c55e22, transparent)', borderLeft: '4px solid #22c55e', borderRadius: '4px' }}>
+        <h2 style={{ fontSize: 20, fontWeight: 800, margin: 0 }}>Panel de Control Pro (Admin)</h2>
+        <p style={{ fontSize: 12, color: '#94a3b8', marginTop: 4 }}>Acceso total desbloqueado para Arquimedes</p>
+      </div>
+      
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, marginBottom: 24 }}>
+        <div className="stat-card">
+          <div style={{ fontSize: 10, color: '#475569' }}>PROFIT FACTOR</div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: '#f59e0b' }}>
+            {stats.losses > 0 ? (stats.wins / stats.losses).toFixed(2) : stats.wins}
+          </div>
+        </div>
+        <div className="stat-card">
+          <div style={{ fontSize: 10, color: '#475569' }}>EXPECTATIVA (AVG)</div>
+          <div style={{ fontSize: 24, fontWeight: 800, color: '#22c55e' }}>
+            {formatCurrency(stats.count > 0 ? stats.total / stats.count : 0)}
+          </div>
+        </div>
+      </div>
+  ) : (
           <div>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, color: '#22c55e', letterSpacing: '0.2em', marginBottom: 8 }}>DESBLOQUEA TU POTENCIAL</div>
