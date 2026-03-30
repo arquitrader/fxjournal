@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { supabase } from '../lib/supabase'
 
 const EMOTIONS = ['😤 Ansioso', '😌 Calmado', '😎 Confiado', '😨 Miedoso', '🤑 Codicioso', '🧘 Disciplinado', '😤 Frustrado', '🎯 Enfocado']
-const PAIRS = ['EUR/USD', 'GBP/USD', 'USD/JPY', 'USD/CHF', 'AUD/USD', 'NZD/USD', 'USD/CAD', 'EUR/GBP', 'EUR/JPY', 'GBP/JPY']
+const PAIRS = ['XAU/USD', 'EUR/USD', 'GBP/USD', 'USD/JPY', 'USD/CHF', 'AUD/USD', 'NZD/USD', 'USD/CAD', 'EUR/GBP', 'EUR/JPY', 'GBP/JPY']
 const DIRECTIONS = ['BUY', 'SELL']
 
 const formatCurrency = (n) => {
