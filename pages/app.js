@@ -295,67 +295,70 @@ export default function App() {
           </div>
         )}
 
-        {/* PREMIUM */}
+{/* PREMIUM */}
         {view === 'premium' && (
-user?.id === 'b3f9b73f-3485-46ec-bc3f-fa2239ace878' ? (
-    /* ESTO SOLO LO VES TÚ (EL DUEÑO) */
-    <div style={{ animation: 'fadeIn 0.5s ease' }}>
-      <div style={{ marginBottom: 24, padding: '16px', background: 'linear-gradient(90deg, #22c55e22, transparent)', borderLeft: '4px solid #22c55e', borderRadius: '4px' }}>
-        <h2 style={{ fontSize: 20, fontWeight: 800, margin: 0 }}>Panel de Control Pro (Admin)</h2>
-        <p style={{ fontSize: 12, color: '#94a3b8', marginTop: 4 }}>Acceso total desbloqueado para Arquimedes</p>
-      </div>
-      
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, marginBottom: 24 }}>
-        <div className="stat-card">
-          <div style={{ fontSize: 10, color: '#475569' }}>PROFIT FACTOR</div>
-          <div style={{ fontSize: 24, fontWeight: 800, color: '#f59e0b' }}>
-            {stats.losses > 0 ? (stats.wins / stats.losses).toFixed(2) : stats.wins}
-          </div>
-        </div>
-        <div className="stat-card">
-          <div style={{ fontSize: 10, color: '#475569' }}>EXPECTATIVA (AVG)</div>
-          <div style={{ fontSize: 24, fontWeight: 800, color: '#22c55e' }}>
-            {formatCurrency(stats.count > 0 ? stats.total / stats.count : 0)}
-          </div>
-        </div>
-      </div>
-  ) : (
-          <div>
-            <div style={{ textAlign: 'center', marginBottom: 36 }}>
-              <div style={{ fontSize: 11, color: '#22c55e', letterSpacing: '0.2em', marginBottom: 8 }}>DESBLOQUEA TU POTENCIAL</div>
-              <span style={{ fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800 }}>Pasa a <span style={{ color: '#22c55e' }}>FXJournal Pro</span></span>
-              <p style={{ color: '#475569', marginTop: 10, fontSize: 14 }}>Análisis avanzado para traders serios.</p>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 32 }}>
-              {[
-                { icon: '📊', title: 'Gráficos avanzados', desc: 'Curva de equity, distribución por par y mucho más.' },
-                { icon: '🧠', title: 'Análisis de emociones', desc: 'Correlación entre estado emocional y resultados.' },
-                { icon: '📅', title: 'Calendario de rendimiento', desc: 'Visualiza tus mejores y peores días del mes.' },
-                { icon: '📤', title: 'Exportar a Excel / PDF', desc: 'Comparte tu historial con tu broker o mentor.' },
-                { icon: '🔔', title: 'Alertas de racha', desc: 'Notificaciones si entras en racha perdedora.' },
-                { icon: '🤖', title: 'IA Coach (próximamente)', desc: 'Retroalimentación personalizada basada en tus datos.' },
-              ].map(f => (
-                <div key={f.title} className="premium-card">
-                  <div style={{ fontSize: 22, marginBottom: 8 }}>{f.icon}</div>
-                  <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 4 }}>{f.title}</div>
-                  <div style={{ fontSize: 12, color: '#475569' }}>{f.desc}</div>
+          user?.id === 'b3f9b73f-3485-46ec-bc3f-fa2239ace878' ? (
+            /* ESTO SOLO LO VES TÚ (EL DUEÑO) */
+            <div style={{ animation: 'fadeIn 0.5s ease' }}>
+              <div style={{ marginBottom: 24, padding: '16px', background: 'linear-gradient(90deg, #22c55e22, transparent)', borderLeft: '4px solid #22c55e', borderRadius: '4px' }}>
+                <h2 style={{ fontSize: 20, fontWeight: 800, margin: 0 }}>Panel de Control Pro (Admin)</h2>
+                <p style={{ fontSize: 12, color: '#94a3b8', marginTop: 4 }}>Acceso total desbloqueado para Arquimedes</p>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 14, marginBottom: 24 }}>
+                <div className="stat-card">
+                  <div style={{ fontSize: 10, color: '#475569' }}>PROFIT FACTOR</div>
+                  <div style={{ fontSize: 24, fontWeight: 800, color: '#f59e0b' }}>
+                    {stats.losses > 0 ? (stats.wins / stats.losses).toFixed(2) : stats.wins}
+                  </div>
                 </div>
-              ))}
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div className="card" style={{ display: 'inline-block', padding: '32px 48px', border: '1px solid #22c55e33' }}>
-                <div style={{ fontSize: 11, color: '#475569', letterSpacing: '0.1em', marginBottom: 8 }}>PLAN PRO</div>
-                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 10, marginBottom: 4 }}>
-                  <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 38, fontWeight: 800, color: '#22c55e' }}>$5<span style={{ fontSize: 16, color: '#475569' }}>/mes</span></div>
-                  <div style={{ textDecoration: 'line-through', color: '#374151', fontSize: 18 }}>$9</div>
+                <div className="stat-card">
+                  <div style={{ fontSize: 10, color: '#475569' }}>EXPECTATIVA (AVG)</div>
+                  <div style={{ fontSize: 24, fontWeight: 800, color: '#22c55e' }}>
+                    {formatCurrency(stats.count > 0 ? stats.total / stats.count : 0)}
+                  </div>
                 </div>
-                <div style={{ display: 'inline-block', background: '#22c55e22', border: '1px solid #22c55e44', borderRadius: 6, padding: '3px 12px', fontSize: 11, color: '#22c55e', letterSpacing: '0.08em', marginBottom: 6 }}>15 DÍAS GRATIS · LUEGO $5/MES</div>
-                <div style={{ fontSize: 12, color: '#374151', marginBottom: 20 }}>Cancela cuando quieras</div>
-                <button className="btn-primary" style={{ width: '100%', fontSize: 14, padding: '12px 24px' }}>Comenzar prueba gratis 15 días</button>
-                <div style={{ fontSize: 11, color: '#374151', marginTop: 12 }}>Sin tarjeta de crédito requerida</div>
               </div>
             </div>
-          </div>
+          ) : (
+            /* ESTO LO VE EL RESTO DE LOS USUARIOS */
+            <div>
+              <div style={{ textAlign: 'center', marginBottom: 36 }}>
+                <div style={{ fontSize: 11, color: '#22c55e', letterSpacing: '0.2em', marginBottom: 8 }}>DESBLOQUEA TU POTENCIAL</div>
+                <span style={{ fontFamily: "'Syne', sans-serif", fontSize: 28, fontWeight: 800 }}>Pasa a <span style={{ color: '#22c55e' }}>FXJournal Pro</span></span>
+                <p style={{ color: '#475569', marginTop: 10, fontSize: 14 }}>Análisis avanzado para traders serios.</p>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 32 }}>
+                {[
+                  { icon: '📊', title: 'Gráficos avanzados', desc: 'Curva de equity, distribución por par y mucho más.' },
+                  { icon: '🧠', title: 'Análisis de emociones', desc: 'Correlación entre estado emocional y resultados.' },
+                  { icon: '📅', title: 'Calendario de rendimiento', desc: 'Visualiza tus mejores y peores días del mes.' },
+                  { icon: '📤', title: 'Exportar a Excel / PDF', desc: 'Comparte tu historial con tu broker o mentor.' },
+                  { icon: '🔔', title: 'Alertas de racha', desc: 'Notificaciones si entras en racha perdedora.' },
+                  { icon: '🤖', title: 'IA Coach (próximamente)', desc: 'Retroalimentación personalizada basada en tus datos.' },
+                ].map(f => (
+                  <div key={f.title} className="premium-card">
+                    <div style={{ fontSize: 22, marginBottom: 8 }}>{f.icon}</div>
+                    <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 4 }}>{f.title}</div>
+                    <div style={{ fontSize: 12, color: '#475569' }}>{f.desc}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div className="card" style={{ display: 'inline-block', padding: '32px 48px', border: '1px solid #22c55e33' }}>
+                  <div style={{ fontSize: 11, color: '#475569', letterSpacing: '0.1em', marginBottom: 8 }}>PLAN PRO</div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 10, marginBottom: 4 }}>
+                    <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 38, fontWeight: 800, color: '#22c55e' }}>$5<span style={{ fontSize: 16, color: '#475569' }}>/mes</span></div>
+                    <div style={{ textDecoration: 'line-through', color: '#374151', fontSize: 18 }}>$9</div>
+                  </div>
+                  <div style={{ display: 'inline-block', background: '#22c55e22', border: '1px solid #22c55e44', borderRadius: 6, padding: '3px 12px', fontSize: 11, color: '#22c55e', letterSpacing: '0.08em', marginBottom: 6 }}>15 DÍAS GRATIS · LUEGO $5/MES</div>
+                  <div style={{ fontSize: 12, color: '#374151', marginBottom: 20 }}>Cancela cuando quieras</div>
+                  <button className="btn-primary" style={{ width: '100%', fontSize: 14, padding: '12px 24px' }}>Comenzar prueba gratis 15 días</button>
+                  <div style={{ fontSize: 11, color: '#374151', marginTop: 12 }}>Sin tarjeta de crédito requerida</div>
+                </div>
+              </div>
+            </div>
+          )
         )}
       </div>
     </div>
