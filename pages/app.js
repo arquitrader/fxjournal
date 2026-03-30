@@ -9,7 +9,7 @@ const DIRECTIONS = ['BUY', 'SELL']
 const formatCurrency = (n) => {
   const num = parseFloat(n)
   if (isNaN(num)) return '$0.00'
-  return (num >= 0 ? '+' : '') + '$' + Math.abs(num).toFixed(2)
+  return (num >= 0 ? '+' : '-') + '$' + Math.abs(num).toFixed(2)
 }
 const formatDate = (d) => new Date(d).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' })
 
@@ -24,10 +24,9 @@ export default function App() {
   const [filterPair, setFilterPair] = useState('Todos')
   const [filterDir, setFilterDir] = useState('Todos')
 
-  const emptyForm = { date: new Date().toISOString().slice(0, 10), pair: 'EUR/USD', direction: 'BUY', entry: '', exit: '', lots: '', pnl: '', emotion: EMOTIONS[1], notes: '' }
+  const emptyForm = { date: new Date().toISOString().slice(0, 10), pair: 'XAU/USD', direction: 'BUY', entry: '', exit: '', lots: '', pnl: '', emotion: EMOTIONS[1], notes: '' }
   const [form, setForm] = useState(emptyForm)
 
-  // Auth check
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) { router.push('/'); return }
@@ -46,27 +45,34 @@ export default function App() {
       .from('trades')
       .select('*')
       .eq('user_id', userId)
-      .order('date', { ascending: false })
+      .order('created_at', { ascending: false })
     if (!error) setTrades(data || [])
     setLoading(false)
   }
 
   const handleAdd = async () => {
+    if (!form.entry || !form.lots) return alert('Llena los campos básicos')
     setSaving(true)
+    
     const newTrade = {
       user_id: user.id,
       date: form.date,
       pair: form.pair,
       direction: form.direction,
       entry: parseFloat(form.entry),
-      exit: parseFloat(form.exit),
+      exit: parseFloat(form.exit) || 0,
       lots: parseFloat(form.lots),
       pnl: parseFloat(form.pnl) || 0,
       emotion: form.emotion,
       notes: form.notes
     }
-    const { data, error } = await supabase.from('trades').insert(newTrade).select()
-    if (!error && data) {
+
+    const { data, error } = await supabase.from('trades').insert([newTrade]).select()
+    
+    if (error) {
+      console.error(error)
+      alert('Error al guardar: ' + error.message)
+    } else if (data) {
       setTrades(prev => [data[0], ...prev])
       setForm(emptyForm)
       setShowForm(false)
@@ -76,8 +82,8 @@ export default function App() {
   }
 
   const handleDelete = async (id) => {
-    await supabase.from('trades').delete().eq('id', id)
-    setTrades(prev => prev.filter(t => t.id !== id))
+    const { error } = await supabase.from('trades').delete().eq('id', id)
+    if (!error) setTrades(prev => prev.filter(t => t.id !== id))
   }
 
   const handleLogout = async () => {
@@ -103,14 +109,7 @@ export default function App() {
     })
   }, [trades, filterPair, filterDir])
 
-  if (loading) return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ width: 10, height: 10, background: '#22c55e', borderRadius: '50%', boxShadow: '0 0 10px #22c55e', margin: '0 auto 16px' }} />
-        <p style={{ color: '#475569', fontSize: 13 }}>Cargando tus trades...</p>
-      </div>
-    </div>
-  )
+  if (loading) return <div style={{color: 'white', textAlign: 'center', marginTop: '20%'}}>Cargando...</div>
 
   return (
     <div style={{ minHeight: '100vh', overflowX: 'hidden' }}>
